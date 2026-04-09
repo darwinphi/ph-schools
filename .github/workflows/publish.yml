@@ -10,6 +10,7 @@ jobs:
   publish:
     runs-on: ubuntu-latest
     permissions:
+      id-token: write # Required for OIDC
       contents: read
 
     steps:
@@ -19,8 +20,11 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: "22"
+          node-version: "22.14.0"
           registry-url: "https://registry.npmjs.org"
+
+      - name: Upgrade npm for Trusted Publishing
+        run: npm install -g npm@^11.5.1
 
       - name: Install dependencies
         run: npm ci
@@ -42,18 +46,6 @@ jobs:
             echo "${PACKAGE_NAME}@${PACKAGE_VERSION} is not published yet. Publishing."
           fi
 
-      - name: Validate npm token
-        if: steps.version_check.outputs.already_published == 'false'
-        run: |
-          if [ -z "${NPM_TOKEN}" ]; then
-            echo "NPM_TOKEN is missing. Add it in GitHub repo settings -> Secrets and variables -> Actions."
-            exit 1
-          fi
-        env:
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-
       - name: Publish package
         if: steps.version_check.outputs.already_published == 'false'
-        run: npm publish --access public
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: npm publish --access public --provenance
