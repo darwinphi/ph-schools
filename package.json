@@ -1,0 +1,37 @@
+{
+  "name": "ph-schools",
+  "version": "1.0.0",
+  "description": "Philippine Schools masterlist dataset (SY 2020-2021).",
+  "license": "MIT",
+  "type": "module",
+  "sideEffects": false,
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs",
+      "default": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "engines": {
+    "node": ">=16"
+  },
+  "scripts": {
+    "generate:data": "node ./scripts/generate-data.mjs",
+    "build": "npm run generate:data && tsup ./src/index.ts --format esm,cjs --dts --target es2020 --clean",
+    "test:runtime": "node --test ./tests/library.test.mjs",
+    "test:types": "tsc -p ./tsconfig.typecheck.json --noEmit",
+    "test": "npm run build && npm run test:runtime && npm run test:types"
+  },
+  "devDependencies": {
+    "@types/node": "^20.14.10",
+    "tsup": "^8.1.0",
+    "typescript": "^5.5.4"
+  }
+}
