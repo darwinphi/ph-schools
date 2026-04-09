@@ -3,6 +3,14 @@
   "version": "1.0.0",
   "description": "Philippine Schools masterlist dataset (SY 2020-2021).",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/darwinphi/ph-schools.git"
+  },
+  "bugs": {
+    "url": "https://github.com/darwinphi/ph-schools/issues"
+  },
+  "homepage": "https://github.com/darwinphi/ph-schools#readme",
   "type": "module",
   "sideEffects": false,
   "main": "./dist/index.cjs",
