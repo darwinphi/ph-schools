@@ -3,3 +3,4 @@ dist/
 .npm-cache/
 *.tgz
 .DS_Store
+DEPLOYMENT_WORKFLOW.md
