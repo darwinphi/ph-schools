@@ -8,6 +8,10 @@ TypeScript + JavaScript library for the Philippine Schools masterlist (SY 2020-2
 npm install ph-schools
 ```
 
+## 📜 Changelog
+
+- See `CHANGELOG.md` for release notes and migration updates.
+
 ## 🏛️ Data Source
 
 - Source organization: `gov.ph` 🇵🇭
