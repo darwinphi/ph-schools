@@ -1,7 +1,7 @@
 {
   "name": "ph-schools",
   "version": "1.0.2",
-  "description": "Philippine Schools masterlist dataset (SY 2020-2021).",
+  "description": "Search and filter Philippine school records with simple TypeScript and JavaScript helpers.",
   "license": "MIT",
   "repository": {
     "type": "git",

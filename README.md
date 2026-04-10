@@ -1,6 +1,8 @@
 # ph-schools
 
-TypeScript + JavaScript library for the Philippine Schools masterlist (SY 2020-2021).
+Quickly find and search Philippine school records in your app.
+
+`ph-schools` includes ready-to-use school data (SY 2020-2021) and simple helpers for BEIS ID lookup, filtering, and search in both TypeScript and JavaScript.
 
 ## 📦 Install
 
