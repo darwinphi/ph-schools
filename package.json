@@ -33,7 +33,7 @@
   "scripts": {
     "generate:data": "node ./scripts/generate-data.mjs",
     "build": "npm run generate:data && tsup ./src/index.ts --format esm,cjs --dts --target es2020 --clean",
-    "test:runtime": "node --test ./tests/library.test.mjs",
+    "test:runtime": "node --test ./tests/library.test.mjs ./tests/generate-data.test.mjs",
     "test:types": "tsc -p ./tsconfig.typecheck.json --noEmit",
     "test": "npm run build && npm run test:runtime && npm run test:types"
   },

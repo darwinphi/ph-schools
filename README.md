@@ -12,7 +12,9 @@ npm install ph-schools
 
 - Source organization: `gov.ph` 🇵🇭
 - Source dataset: `SY 2020-2021 Masterlist of Schools` 🏫
-- Embedded source file used by this package build: `schools_masterlist_2020_2021.json` 🗂️
+- Canonical dataset repo: `darwinphi/ph-schools-dataset` 📚
+- Pinned data release tag used by this library: `v1.0.0` (via `data-source.json`) 🧷
+- Embedded source filename in generated output: `schools_masterlist_2020_2021.json` 🗂️
 
 ## 🔷 Usage (TypeScript)
 
@@ -96,11 +98,24 @@ console.log(dataVersion);
 - `PaginationOptions: { page?: number; pageSize?: number }`
 - `dataVersion: { packageVersion: string; schoolYear: "2020-2021"; sourceFile: string; sourceOrganization: "gov.ph"; recordCount: number }`
 
+## 🔁 Data Update (Maintainers)
+
+When the dataset repo publishes a new tag:
+
+1. Update `data-source.json` (`tag` and `sha256`)
+2. Regenerate and test:
+   - `npm run build`
+   - `npm test`
+3. Release npm package:
+   - `npm version patch` (or `minor` / `major`)
+   - `git push`
+   - `git push --tags`
+
 ## 📝 Notes
 
-- The runtime package uses the generated embedded dataset from `schools_masterlist_2020_2021.json` ✅
-- This repo is JSON-source-only for library generation (`schools_masterlist_2020_2021.json`) 🧱
+- The runtime package uses generated embedded data built from a pinned release in `ph-schools-dataset` ✅
 - Build command regenerates embedded data before bundling 🔁
+- Set `PH_SCHOOLS_DATA_PATH=/path/to/local.json` to generate from a local override dataset for development 🛠️
 - Runtime guards are included for JavaScript callers:
   - `findByBeisId(nonString)` returns `undefined`
   - `searchSchools(nonStringQuery)` returns `[]`

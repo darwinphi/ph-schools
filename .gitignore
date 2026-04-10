@@ -3,4 +3,5 @@ dist/
 .npm-cache/
 *.tgz
 .DS_Store
+schools_masterlist_2020_2021.json
 DEPLOYMENT_WORKFLOW.md
