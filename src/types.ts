@@ -9,8 +9,8 @@ export interface SchoolRecordRaw {
   "Legislative District": string;
   "Barangay": string;
   "Sector": string;
-  "Urban/Ru": string;
-  "Sacl hColaosls Sifuicbactliaosnsification": string;
+  "Urban/Rural": string;
+  "School Subclassification": string;
   "Modified Curricural Offering Classification": string;
 }
 

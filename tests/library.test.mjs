@@ -6,6 +6,36 @@ import * as esm from "../dist/index.js";
 
 const require = createRequire(import.meta.url);
 const cjs = require("../dist/index.cjs");
+const expectedRawKeys = [
+  "Region",
+  "Division",
+  "District",
+  "BEIS School ID",
+  "School Name",
+  "Street Address",
+  "Municipality",
+  "Legislative District",
+  "Barangay",
+  "Sector",
+  "Urban/Rural",
+  "School Subclassification",
+  "Modified Curricural Offering Classification"
+];
+const rawToNormalizedFieldPairs = [
+  ["Region", "region"],
+  ["Division", "division"],
+  ["District", "district"],
+  ["BEIS School ID", "beisSchoolId"],
+  ["School Name", "schoolName"],
+  ["Street Address", "streetAddress"],
+  ["Municipality", "municipality"],
+  ["Legislative District", "legislativeDistrict"],
+  ["Barangay", "barangay"],
+  ["Sector", "sector"],
+  ["Urban/Rural", "urbanRu"],
+  ["School Subclassification", "schoolClassification"],
+  ["Modified Curricural Offering Classification", "modifiedCurricuralOfferingClassification"]
+];
 
 test("esm and cjs exports are available", () => {
   assert.equal(typeof esm.getAllSchools, "function");
@@ -28,22 +58,46 @@ test("first record keeps normalized fields and raw payload", () => {
   const first = esm.schools[0];
 
   assert.equal(first.beisSchoolId, "100001");
-  assert.equal(first.schoolName, "Apaleng-Libtong ES");
+  assert.equal(first.schoolName, "Apaleng-Libtong Elementary School");
   assert.equal(first.region, "Region I");
   assert.equal(first.schoolClassification, "DepED Managed");
 
   assert.equal(first.raw["BEIS School ID"], "100001");
-  assert.equal(first.raw["School Name"], "Apaleng-Libtong ES");
+  assert.equal(first.raw["School Name"], "Apaleng-Libtong Elementary School");
   assert.equal(
     first.raw["Modified Curricural Offering Classification"],
     "Purely ES"
   );
 });
 
+test("raw payload uses canonical keys and excludes legacy typo keys", () => {
+  const first = esm.schools[0];
+  const keys = Object.keys(first.raw).sort();
+
+  assert.deepEqual(keys, [...expectedRawKeys].sort());
+
+  assert.equal("Urban/Ru" in first.raw, false);
+  assert.equal("Sacl hColaosls Sifuicbactliaosnsification" in first.raw, false);
+});
+
+test("all dataset keys match normalized runtime keys", () => {
+  const expectedKeySet = new Set(expectedRawKeys);
+
+  for (const school of esm.schools) {
+    const rawKeys = Object.keys(school.raw);
+    assert.equal(rawKeys.length, expectedRawKeys.length);
+    assert.deepEqual(new Set(rawKeys), expectedKeySet);
+
+    for (const [rawKey, normalizedKey] of rawToNormalizedFieldPairs) {
+      assert.equal(school[normalizedKey], school.raw[rawKey]);
+    }
+  }
+});
+
 test("findByBeisId returns exact trimmed match", () => {
   const record = esm.findByBeisId(" 100001 ");
   assert.ok(record);
-  assert.equal(record?.schoolName, "Apaleng-Libtong ES");
+  assert.equal(record?.schoolName, "Apaleng-Libtong Elementary School");
   assert.equal(esm.findByBeisId(""), undefined);
 });
 

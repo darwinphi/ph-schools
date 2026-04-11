@@ -65,8 +65,8 @@ const schoolsInternal: SchoolRecord[] = rawRecords.map((raw) =>
     legislativeDistrict: raw["Legislative District"],
     barangay: raw["Barangay"],
     sector: raw["Sector"],
-    urbanRu: raw["Urban/Ru"],
-    schoolClassification: raw["Sacl hColaosls Sifuicbactliaosnsification"],
+    urbanRu: raw["Urban/Rural"],
+    schoolClassification: raw["School Subclassification"],
     modifiedCurricuralOfferingClassification:
       raw["Modified Curricural Offering Classification"],
     raw

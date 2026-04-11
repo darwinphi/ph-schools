@@ -23,8 +23,8 @@ const expectedKeys = [
   "Legislative District",
   "Barangay",
   "Sector",
-  "Urban/Ru",
-  "Sacl hColaosls Sifuicbactliaosnsification",
+  "Urban/Rural",
+  "School Subclassification",
   "Modified Curricural Offering Classification"
 ];
 

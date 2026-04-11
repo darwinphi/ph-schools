@@ -19,7 +19,7 @@ npm install ph-schools
 - Source organization: `gov.ph` 🇵🇭
 - Source dataset: `SY 2020-2021 Masterlist of Schools` 🏫
 - Canonical dataset repo: `darwinphi/ph-schools-dataset` 📚
-- Pinned data release tag used by this library: `v1.0.0` (via `data-source.json`) 🧷
+- Pinned data release tag used by this library: `v1.0.1` (via `data-source.json`) 🧷
 - Embedded source filename in generated output: `schools_masterlist_2020_2021.json` 🗂️
 
 ## 🔷 Usage (TypeScript)
@@ -67,7 +67,7 @@ import {
 const one = findByBeisId('100001');
 const regionPublicPage1 = filterSchools(
   { region: 'Region I', sector: 'Public' },
-  { page: 1, pageSize: 25 }
+  { page: 1, pageSize: 25 },
 );
 const matchesPage2 = searchSchools('bacarra', { page: 2, pageSize: 10 });
 const allPage3 = getAllSchools({ page: 3, pageSize: 100 });
@@ -130,7 +130,3 @@ When the dataset repo publishes a new tag:
   - Unknown `filterSchools` keys or invalid `searchSchools` fields safely return `[]`
   - Invalid pagination values fall back to `page: 1`, `pageSize: 50`
 - Exported school records are frozen to prevent accidental mutation
-
-```bash
-npm run build
-```

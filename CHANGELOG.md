@@ -4,6 +4,16 @@ All notable changes to this project will be documented in this file.
 
 The format is inspired by Keep a Changelog and follows semantic versioning.
 
+## [1.0.3] - 2026-04-11
+
+### Changed
+
+- Pinned `data-source.json` to `darwinphi/ph-schools-dataset` tag `v1.0.1`.
+- Updated canonical raw key handling to use:
+  - `Urban/Rural` (was `Urban/Ru`)
+  - `School Subclassification` (was `Sacl hColaosls Sifuicbactliaosnsification`)
+- Updated generator fixture coverage for the corrected canonical keys.
+
 ## [1.0.2] - 2026-04-10
 
 Maintenance release. No runtime API changes.
